@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="center">
+        <form method="post" novalidate class="card">
+            {%  csrf_token %}
+            <h2>Delete Job</h2>
+            <p>Are you sure that you want to job "{{ job }}"?</p>
+            <div class="form-buttons">
+                <input type="submit" value="Delete" class="btn btn-primary">
+                <a href="{% url 'employee_list' %}" class="btn btn-outline">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+        <h1 style="color: #3498db; text-align: center;" >You have {{ jobs.count }} job(s)</h1>
+        <ul style="list-style-type: none; padding: 0;">
+    <li style="margin-bottom: 10px;"><a href="{% url 'add_job' %}" style="text-decoration: none; color: #2ecc71; font-size: 1.2em;">Add Job</a></li>
+</ul>
+   {% for job in jobs %}
+    <p>
+        {{ job.title }}
+        {% for assignment in assignments %}
+            {% if job.id == assignment.position_id %}
+                | {{ assignments.count }}
+            {% endif %}
+        {% endfor %}
+        | <a href="{% url 'delete_job' pk=job.id %}" style="text-decoration: none; color: #e74c3c;">Delete</a>
+    </p>
+    <br>
+{% endfor %}
+
+        {% endblock %}
+                            <

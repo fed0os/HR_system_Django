@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+<h1 style="color: #3498db; text-align: center;" >You have {{ departments.count }} department(s)</h1>
+
+<ul style="list-style-type: none; padding: 0;">
+    <li style="margin-bottom: 10px;"><a href="{% url 'add_department' %}" style="text-decoration: none; color: #2ecc71; font-size: 1.2em;">Add Department</a></li>
+</ul>
+
+<section>
+    {% for department in departments %}
+        <div style="border: 1px solid #ccc; margin-bottom: 20px; padding: 15px;">
+            <div style="margin-bottom: 10px;">
+                <a href="{% url 'update_departments' pk=department.id %}" style="text-decoration: none; color: #3498db; margin-right: 10px;">Update</a>
+                <a href="{% url 'delete_departments' pk=department.id %}" style="text-decoration: none; color: #e74c3c;">Delete</a>
+            </div>
+            <div style="margin-top: 10px;">
+                <p style="font-weight: bold; font-size: 1.2em;">{{ department.name }}</p>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li style="margin-bottom: 5px;">{{ department.description }}</li>
+
+            </div>
+        </div>
+    {% endfor %}
+</section>
+
+        {% endblock %}

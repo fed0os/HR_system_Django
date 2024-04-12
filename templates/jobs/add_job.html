@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 style="color: #3498db; margin-bottom: 20px;">{{ title }}</h1>
+    <form action="{% url 'add_job' %}" method="post" style="margin-top: 20px;">
+        {% csrf_token %}
+        {% for field in form %}
+           title: {{ field }}
+        {% endfor %}
+
+        <button type="submit" style="background-color: #2ecc71; color: #fff; padding: 10px 15px; border: none; cursor: pointer;">Add</button>
+    </form>
+{% endblock %}

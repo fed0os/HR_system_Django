@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="english">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
+
+</head>
+<body>
+    <header>
+        <h1 style="color: #3498db; text-align: center;" ><a href="{% url 'homepage' %}" style="text-decoration: none; color: #2ecc71; font-size: 1.2em;">Welcome to Hr-System</a></h1>
+        <nav>
+            <ul>
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'homepage' %}">Home page</a></li>
+                <li><a href="{% url 'employee_list' %}">Employees</a></li>
+                <li><a href="{% url 'departments' %}">Departments</a></li>
+                <li><a href="{% url 'assignments' %}">Assignments</a></li>
+                <li><a href="{% url 'jobs' %}">Jobs</a></li>
+                <li class="last">{{ user.username }} | <a href="{% url 'logout' %}">Exit</a></li>
+
+                {% else %}
+
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'registration' %}">Registration</a></li>
+
+                {% endif %}
+
+
+{#                <li><a href="{% url 'history' %}">Assignments</a></li>#}
+
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% if request.user.is_authenticated %}
+        {% else %}<h1>For using this application you must login</h1>{% endif %}
+    {% block content %}
+        {% endblock %}
+
+    <nav class="list-pages">
+    <ul>
+        {% for p in paginator.page_range %}
+        <li class="page-num">
+            <a href="?page={{ p }}">{{ p }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</nav>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Django Exam .</p>
+    </footer>
+</body>
+</html>

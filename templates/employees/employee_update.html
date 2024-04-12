@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Update Employee Information</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Employee</button>
+  </form>
+  <a href="{% url 'employee_list' %}">Back to Employee List</a>
+{% endblock %}

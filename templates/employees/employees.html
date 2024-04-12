@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+
+    <h1 style="color: #3498db; text-align: center;" >You have {{ employees.count }} employees(s)</h1>
+
+<ul style="list-style-type: none; padding: 0;">
+    <li style="margin-bottom: 10px;"><a href="{% url 'add_employee' %}" style="text-decoration: none; color: #2ecc71; font-size: 1.2em;">Add Employee</a></li>
+</ul>
+
+    <section>
+
+        {% for employee in employees %}
+    <div style="border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;">
+        <div style="margin-bottom: 10px;">
+            <a href="{% url 'employee_update' pk=employee.id %}" style="text-decoration: none; color: #3498db; margin-right: 10px;">Update</a>
+            <a href="{% url 'employee_delete' pk=employee.id %}" style="text-decoration: none; color: #e74c3c;">Delete</a>
+        </div>
+        <div style="margin-top: 10px;">
+            <p style="font-weight: bold; font-size: 1.2em;">{{ employee.first_name }} {{ employee.last_name }}</p>
+            <ul style="list-style-type: none; padding: 0;">
+                <li style="margin-bottom: 5px;">Phone: {{ employee.phone }}</li>
+                <li style="margin-bottom: 5px;">Address: {{ employee.address }}</li>
+                <li style="margin-bottom: 5px;">Department: {{ employee.department }}</li>
+            </ul>
+        </div>
+    </div>
+{% endfor %}
+    {% else %}<h1 style="color: #3498db; text-align: center;" ><a href="{% url 'registration' %}" style="text-decoration: none; color: #2ecc71; font-size: 1.2em;">You must registrate</a></h1>{% endif %}
+
+
+    </section>
+{% endblock %}
+
